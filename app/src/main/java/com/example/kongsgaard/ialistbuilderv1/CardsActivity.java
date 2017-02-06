@@ -1,12 +1,14 @@
 package com.example.kongsgaard.ialistbuilderv1;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,18 +19,18 @@ public class CardsActivity extends AppCompatActivity {
     List<CardClass> baselist;
     CardClassArrayAdapter baseAdapter;
     CardClass tempcard;
-    DbOperator myOperator;
+    DataBaseHelper myOperator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cards);
         mainView = (ListView) findViewById(R.id.mainListView);
         Intent intent = getIntent();
-        myOperator = DbOperator.getInstance(this);
         baselist = new ArrayList<>();
         baseAdapter = new CardClassArrayAdapter(this, baselist);
         mainView.setAdapter(baseAdapter);
-        getRebelList(null);
+        myOperator = new DataBaseHelper(this);
+ //       getRebelList(null);
         mainView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -49,10 +51,10 @@ public class CardsActivity extends AppCompatActivity {
 
     public void getRebelList(View view) {
        List<CardClass> rebelList = myOperator.getRebelList();
-       // CardClass luke1 = new CardClass("Luke SkyWalker", 10, R.drawable.lukeskywalker);
-       // CardClass lando = new CardClass("Lando Calrissian", 6 , R.drawable.andocalrissian);
-       // rebelList.add(luke1);
-       // rebelList.add(lando);
+        CardClass luke1 = new CardClass("Luke SkyWalker", 10, R.drawable.lukeskywalker);
+        CardClass lando = new CardClass("Lando Calrissian", 6 , R.drawable.andocalrissian);
+        rebelList.add(luke1);
+        rebelList.add(lando);
         baselist.clear();
         for (CardClass card: rebelList) {
             baselist.add(card);

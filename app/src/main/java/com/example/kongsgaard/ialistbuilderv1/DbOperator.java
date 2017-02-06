@@ -19,21 +19,14 @@ import java.util.List;
  */
 
 public class DbOperator extends SQLiteOpenHelper {
-    public static final String DBNAME = "IAListBuilderDatabase.db";
+    public static final String DBNAME = "ailistbuilderdatabase.db";
     public static final String DBLOCATION = "/data/data/com.example.kongsgaard.ialistbuilderv1/databases/";
     private Context mContext;
     private SQLiteDatabase mDatabase;
-    private static DbOperator mInstance = null;
-
-    public static DbOperator getInstance (Context ctx){
-        if(mInstance == null){
-            mInstance = new DbOperator(ctx.getApplicationContext());
-        }
-        return mInstance;
-    }
 
 
-    private DbOperator(Context context){
+
+    public DbOperator(Context context){
         super(context,DBNAME, null, 1);
         this.mContext = context;
     }

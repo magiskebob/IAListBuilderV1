@@ -10,27 +10,24 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
-
+    DataBaseHelper myOperator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DbOperator myOperator = DbOperator.getInstance(this);
-        try
-        {
-            myOperator.createDatabase();
-        }catch (IOException ioe){
-            throw new Error("Unable to create Database");
-        }
+        myOperator = new DataBaseHelper(this);
         try {
 
-            myOperator.openDatabase();
+            myOperator.createDataBase();
 
-        }catch(android.database.SQLException sqle){
+        } catch (IOException ioe) {
 
-            throw sqle;
+            throw new Error("Unable to create database");
 
         }
+
+        myOperator.openDataBase();
+
     }
 
     public void navigateToFactionCards(View view) {
