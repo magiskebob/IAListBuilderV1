@@ -150,11 +150,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM RebelCards", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            String name = cursor.getString(1);
-            int cost = cursor.getInt(2);
-            String imageName = cursor.getString(3);
-            int id = myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+imageName, null, null);
-            card = new CardClass(name,cost, id);
+            card = new CardClass(cursor.getString(1),cursor.getInt(2), myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+cursor.getString(3), null, null));
             cardList.add(card);
             cursor.moveToNext();
         }
