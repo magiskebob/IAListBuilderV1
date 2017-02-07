@@ -1,6 +1,7 @@
 package com.example.kongsgaard.ialistbuilderv1;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.DropBoxManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        myOperator.openDataBase();
+        //myOperator.openDataBase();
+      //  TestAdapter mDbHelper = new TestAdapter(this);
+      //  mDbHelper.createDatabase();
+      //  mDbHelper.open();
+
+       // Cursor testdata = mDbHelper.getTestData();
+
+       // mDbHelper.close();
 
     }
 

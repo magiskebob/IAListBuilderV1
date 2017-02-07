@@ -5,13 +5,14 @@ package com.example.kongsgaard.ialistbuilderv1;
  */
 
 public class CardClass {
-    public int ID ;
+    public int _id ;
     public String Name;
     public int PointCost;
     public int CardImage;
 
     public CardClass (String name, int pointCost, int imagePath)
     {
+        //this._id = id;
         this.Name = name;
         this.PointCost = pointCost;
         this.CardImage = imagePath;
@@ -41,12 +42,12 @@ public class CardClass {
     public void setCardImage(int cardImage) {
         CardImage = cardImage;
     }
-    public int getID() {
-        return ID;
+    public int get_id() {
+        return _id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void set_id(int ID) {
+        this._id = ID;
     }
 
 

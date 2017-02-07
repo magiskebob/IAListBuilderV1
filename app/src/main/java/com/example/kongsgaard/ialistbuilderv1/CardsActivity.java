@@ -50,23 +50,24 @@ public class CardsActivity extends AppCompatActivity {
 
 
     public void getRebelList(View view) {
-       List<CardClass> rebelList = myOperator.getRebelList();
+       // List<CardClass> rebelList = new ArrayList<>();
+        List<CardClass> rebelList = myOperator.getRebelList();
         CardClass luke1 = new CardClass("Luke SkyWalker", 10, R.drawable.lukeskywalker);
         CardClass lando = new CardClass("Lando Calrissian", 6 , R.drawable.andocalrissian);
-        rebelList.add(luke1);
-        rebelList.add(lando);
+       // rebelList.add(luke1);
+       // rebelList.add(lando);
         baselist.clear();
         for (CardClass card: rebelList) {
             baselist.add(card);
             baseAdapter.notifyDataSetChanged();
-            
+
         }
     }
 
     public void getEmpireList(View view) {
         List<CardClass> empireList = new ArrayList<>();
-        CardClass darthVader = new CardClass("Darth vader", 18, R.drawable.darthvader);
-        empireList.add(darthVader);
+       // CardClass darthVader = new CardClass(1,"Darth vader", 18, R.drawable.darthvader);
+       // empireList.add(darthVader);
         baselist.clear();
         for (CardClass card : empireList) {
             baselist.add(card);
@@ -77,8 +78,8 @@ public class CardsActivity extends AppCompatActivity {
 
     public void getScumList(View view) {
         List<CardClass> scumList = new ArrayList<>();
-        CardClass bobaFett = new CardClass("Boba Fett", 13, R.drawable.bobafett);
-        scumList.add(bobaFett);
+       // CardClass bobaFett = new CardClass(1,"Boba Fett", 13, R.drawable.bobafett);
+      //  scumList.add(bobaFett);
         baselist.clear();
         for (CardClass card : scumList) {
             baselist.add(card);

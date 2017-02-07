@@ -21,7 +21,7 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     //The Android's default system path of your application database.
-    private static String DB_PATH = "/data/com.example.kongsgaard.ialistbuilderv1/databases/";
+    private static String DB_PATH = "/data/data/com.example.kongsgaard.ialistbuilderv1/databases/";
 
     private static String DB_NAME = "ailistbuilderdatabase.db";
 
@@ -147,10 +147,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         CardClass card = null;
         List<CardClass> cardList = new ArrayList<>();
         openDataBase();
-        Cursor cursor = myDataBase.rawQuery("SELECT * FROM REBELCARDS", null);
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM RebelCards", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            card = new CardClass(cursor.getString(1),cursor.getInt(2),Integer.parseInt(cursor.getString(3)));
+            String name = cursor.getString(1);
+            int cost = cursor.getInt(2);
+            String imageName = cursor.getString(3);
+            int id = myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+imageName, null, null);
+            card = new CardClass(name,cost, id);
             cardList.add(card);
             cursor.moveToNext();
         }
