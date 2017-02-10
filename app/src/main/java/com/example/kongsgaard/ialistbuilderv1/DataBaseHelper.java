@@ -158,6 +158,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         close();
         return cardList;
     }
+    public List<CardClass> getEmpireList(){
+        CardClass card = null;
+        List<CardClass> cardList = new ArrayList<>();
+        openDataBase();
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM EmpireCards", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            card = new CardClass(cursor.getString(1),cursor.getInt(2), myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+cursor.getString(3), null, null));
+            cardList.add(card);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        close();
+        return cardList;
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {

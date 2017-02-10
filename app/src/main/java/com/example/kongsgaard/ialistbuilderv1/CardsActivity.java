@@ -65,7 +65,7 @@ public class CardsActivity extends AppCompatActivity {
     }
 
     public void getEmpireList(View view) {
-        List<CardClass> empireList = new ArrayList<>();
+        List<CardClass> empireList = myOperator.getEmpireList();
        // CardClass darthVader = new CardClass(1,"Darth vader", 18, R.drawable.darthvader);
        // empireList.add(darthVader);
         baselist.clear();

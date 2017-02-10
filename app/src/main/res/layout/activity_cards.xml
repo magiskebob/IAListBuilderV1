@@ -39,7 +39,7 @@
             android:textAllCaps="false"
             android:textSize="20dp"
             android:text="Empire"
-            android:onClick="getEmpireList"/>
+            android:onClick="getEmpireList" />
 
         <Button
             android:id="@+id/scum"
