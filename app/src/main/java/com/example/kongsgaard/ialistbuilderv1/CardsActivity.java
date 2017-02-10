@@ -52,8 +52,6 @@ public class CardsActivity extends AppCompatActivity {
     public void getRebelList(View view) {
        // List<CardClass> rebelList = new ArrayList<>();
         List<CardClass> rebelList = myOperator.getRebelList();
-        CardClass luke1 = new CardClass("Luke SkyWalker", 10, R.drawable.lukeskywalker);
-        CardClass lando = new CardClass("Lando Calrissian", 6 , R.drawable.andocalrissian);
        // rebelList.add(luke1);
        // rebelList.add(lando);
         baselist.clear();
@@ -77,7 +75,7 @@ public class CardsActivity extends AppCompatActivity {
     }
 
     public void getScumList(View view) {
-        List<CardClass> scumList = new ArrayList<>();
+        List<CardClass> scumList = myOperator.getScumList();
        // CardClass bobaFett = new CardClass(1,"Boba Fett", 13, R.drawable.bobafett);
       //  scumList.add(bobaFett);
         baselist.clear();

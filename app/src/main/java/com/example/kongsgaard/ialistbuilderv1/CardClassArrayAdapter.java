@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import static com.example.kongsgaard.ialistbuilderv1.R.id.cardCost;
+import static com.example.kongsgaard.ialistbuilderv1.R.id.cardName;
+
 /**
  * Created by Kongsgaard on 05-02-2017.
  */
@@ -27,10 +30,21 @@ public class CardClassArrayAdapter extends ArrayAdapter<CardClass> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.cardlistlayout, parent, false);
         }
         // Lookup view for data population
-        TextView cardName = (TextView) convertView.findViewById(R.id.cardName);
+        TextView cardname = (TextView) convertView.findViewById(R.id.cardName);
         TextView cardCost = (TextView) convertView.findViewById(R.id.cardCost);
         // Populate the data into the template view using the data object
-        cardName.setText(card.Name);
+        if (card.Elite == true) {
+            cardname.setBackgroundColor(0xFFFF0000);
+            cardname.setTextColor(0xFFFFFFFF);
+
+        }
+        else {
+            cardname.setTextColor(0xFFFFFFFF);
+            cardname.setBackgroundColor(0x00000000);
+        }
+
+
+        cardname.setText(card.Name);
         cardCost.setText(String.valueOf(card.PointCost));
         // Return the completed view to render on screen
         return convertView;

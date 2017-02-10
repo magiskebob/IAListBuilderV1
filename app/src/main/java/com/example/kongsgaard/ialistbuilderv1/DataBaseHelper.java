@@ -145,12 +145,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public List<CardClass> getRebelList(){
         CardClass card = null;
+        boolean elite;
         List<CardClass> cardList = new ArrayList<>();
         openDataBase();
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM RebelCards", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            card = new CardClass(cursor.getString(1),cursor.getInt(2), myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+cursor.getString(3), null, null));
+ //           elite = cursor.getInt(4)>0;
+            card = new CardClass(cursor.getString(1),cursor.getInt(2), myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+cursor.getString(3), null, null),cursor.getInt(4)>0);
             cardList.add(card);
             cursor.moveToNext();
         }
@@ -165,7 +167,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM EmpireCards", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            card = new CardClass(cursor.getString(1),cursor.getInt(2), myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+cursor.getString(3), null, null));
+            card = new CardClass(cursor.getString(1),cursor.getInt(2), myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+cursor.getString(3), null, null),(cursor.getInt(4)>0));
+            cardList.add(card);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        close();
+        return cardList;
+    }
+    public List<CardClass> getScumList(){
+        CardClass card = null;
+        List<CardClass> cardList = new ArrayList<>();
+        openDataBase();
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM ScumCards", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            card = new CardClass(cursor.getString(1),cursor.getInt(2), myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+cursor.getString(3), null, null),(cursor.getInt(4)>0));
             cardList.add(card);
             cursor.moveToNext();
         }

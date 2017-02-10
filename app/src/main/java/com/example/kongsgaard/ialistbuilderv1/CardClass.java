@@ -9,13 +9,18 @@ public class CardClass {
     public String Name;
     public int PointCost;
     public int CardImage;
+    public boolean Elite;
 
-    public CardClass (String name, int pointCost, int imagePath)
+
+
+    public CardClass (String name, int pointCost, int imagePath, boolean elite)
     {
         //this._id = id;
         this.Name = name;
         this.PointCost = pointCost;
         this.CardImage = imagePath;
+        this.Elite = elite;
+
     }
 
     public CardClass() {
@@ -48,6 +53,13 @@ public class CardClass {
 
     public void set_id(int ID) {
         this._id = ID;
+    }
+    public boolean isElite() {
+        return Elite;
+    }
+
+    public void setElite(boolean elite) {
+        Elite = elite;
     }
 
 
