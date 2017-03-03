@@ -22,11 +22,11 @@ public class ArmyListAdapter extends ArrayAdapter<ArmyList> {
         ArmyList army = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.cardlistlayout, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.armylistlayout, parent, false);
         }
         // Lookup view for data population
         TextView armyName = (TextView) convertView.findViewById(R.id.armyname);
-        TextView armyCost = (TextView) convertView.findViewById(R.id.armyname);
+        TextView armyCost = (TextView) convertView.findViewById(R.id.armycost);
         // Populate the data into the template view using the data object
 
         armyName.setText(army.Name);

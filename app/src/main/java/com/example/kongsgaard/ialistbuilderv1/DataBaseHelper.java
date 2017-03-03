@@ -195,14 +195,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return cardList;
     }
     public List<ArmyList> getArmyLists(){
-        ArmyList temp = null;
+        ArmyList tempArmy = null;
         List<ArmyList>templist = new ArrayList<>();
         openDataBase();
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM ArmyLists", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            temp = new ArmyList(cursor.getString(1),cursor.getInt(2));
-            templist.add(temp);
+            tempArmy = new ArmyList(cursor.getString(1),cursor.getInt(2));
+            templist.add(tempArmy);
             cursor.moveToNext();
         }
         cursor.close();

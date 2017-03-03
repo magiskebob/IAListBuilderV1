@@ -38,8 +38,8 @@ public class ArmyListsActivity extends AppCompatActivity {
             }
 
         });
-        test_list = new ArrayList<>();
-        ArmyList test = new ArmyList(test_list,"test_test", 40);
+       // test_list = new ArrayList<>();
+      //  ArmyList test = new ArmyList(test_list,"test_test", 40);
        // myOperator.addArmyList(test);
         getArmyLists();
     }
