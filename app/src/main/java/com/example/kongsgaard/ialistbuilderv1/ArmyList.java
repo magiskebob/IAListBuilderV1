@@ -15,14 +15,22 @@ public class ArmyList {
     public ArmyList(){
 
     }
+    public ArmyList(List<CardClass> cards,int Id,String name, int cost){
+        this.Name = name;
+        this.TotalCost = cost;
+        this._id = Id;
+        this.armylist = cards;
+    }
+
     public ArmyList(List<CardClass> list, String name, int cost){
         this.Name = name;
         this.armylist = list;
         this.TotalCost = cost;
     }
-    public ArmyList(String name, int cost){
+    public ArmyList(int Id,String name, int cost){
         this.Name = name;
         this.TotalCost = cost;
+        this._id = Id;
     }
 
 

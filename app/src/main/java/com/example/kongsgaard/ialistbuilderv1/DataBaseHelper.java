@@ -7,13 +7,17 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by magiskebob on 06-02-2017.
@@ -195,14 +199,152 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return cardList;
     }
     public List<ArmyList> getArmyLists(){
+        int tempCardId = 0;
         ArmyList tempArmy = null;
+        CardClass tempcard = null;
         List<ArmyList>templist = new ArrayList<>();
+        List<CardClass>armycards = new ArrayList<>();
         openDataBase();
         Cursor cursor = myDataBase.rawQuery("SELECT * FROM ArmyLists", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            tempArmy = new ArmyList(cursor.getString(1),cursor.getInt(2));
+            tempArmy = new ArmyList(new List<CardClass>() {
+                @Override
+                public int size() {
+                    return 0;
+                }
+
+                @Override
+                public boolean isEmpty() {
+                    return false;
+                }
+
+                @Override
+                public boolean contains(Object o) {
+                    return false;
+                }
+
+                @NonNull
+                @Override
+                public Iterator<CardClass> iterator() {
+                    return null;
+                }
+
+                @NonNull
+                @Override
+                public Object[] toArray() {
+                    return new Object[0];
+                }
+
+                @NonNull
+                @Override
+                public <T> T[] toArray(T[] a) {
+                    return null;
+                }
+
+                @Override
+                public boolean add(CardClass cardClass) {
+                    return false;
+                }
+
+                @Override
+                public boolean remove(Object o) {
+                    return false;
+                }
+
+                @Override
+                public boolean containsAll(Collection<?> c) {
+                    return false;
+                }
+
+                @Override
+                public boolean addAll(Collection<? extends CardClass> c) {
+                    return false;
+                }
+
+                @Override
+                public boolean addAll(int index, Collection<? extends CardClass> c) {
+                    return false;
+                }
+
+                @Override
+                public boolean removeAll(Collection<?> c) {
+                    return false;
+                }
+
+                @Override
+                public boolean retainAll(Collection<?> c) {
+                    return false;
+                }
+
+                @Override
+                public void clear() {
+
+                }
+
+                @Override
+                public CardClass get(int index) {
+                    return null;
+                }
+
+                @Override
+                public CardClass set(int index, CardClass element) {
+                    return null;
+                }
+
+                @Override
+                public void add(int index, CardClass element) {
+
+                }
+
+                @Override
+                public CardClass remove(int index) {
+                    return null;
+                }
+
+                @Override
+                public int indexOf(Object o) {
+                    return 0;
+                }
+
+                @Override
+                public int lastIndexOf(Object o) {
+                    return 0;
+                }
+
+                @Override
+                public ListIterator<CardClass> listIterator() {
+                    return null;
+                }
+
+                @NonNull
+                @Override
+                public ListIterator<CardClass> listIterator(int index) {
+                    return null;
+                }
+
+                @NonNull
+                @Override
+                public List<CardClass> subList(int fromIndex, int toIndex) {
+                    return null;
+                }
+            },cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
+            Cursor cursor2 = myDataBase.rawQuery("SELECT CardID FROM ArmyContent WHERE ArmyID = "+tempArmy._id, null);
+            cursor2.moveToFirst();
+            while(!cursor2.isAfterLast()) {
+                tempCardId = cursor2.getInt(0);
+                Cursor cardCursor = myDataBase.rawQuery("SELECT * FROM RebelCards WHERE _id = "+tempCardId,null);
+                cardCursor.moveToFirst();
+                tempcard = new CardClass(cardCursor.getInt(0),cardCursor.getString(1),cardCursor.getInt(2), myContext.getResources().getIdentifier("com.example.kongsgaard.ialistbuilderv1:drawable/"+cardCursor.getString(3), null, null),(cardCursor.getInt(4)>0));
+                armycards.add(tempcard);
+                cursor2.moveToNext();
+            }
+            for (CardClass card:armycards
+                 ) {tempArmy.armylist.add(card);
+
+            }
             templist.add(tempArmy);
+            armycards.clear();
             cursor.moveToNext();
         }
         cursor.close();

@@ -22,6 +22,15 @@ public class CardClass {
         this.Elite = elite;
 
     }
+    public CardClass (int id,String name, int pointCost, int imagePath, boolean elite)
+    {
+        this._id = id;
+        this.Name = name;
+        this.PointCost = pointCost;
+        this.CardImage = imagePath;
+        this.Elite = elite;
+
+    }
 
     public CardClass() {
     }
