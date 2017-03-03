@@ -43,4 +43,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void navigateToArmyLists(View view) {
+        Intent intent = new Intent(this, ArmyListsActivity.class);
+        startActivity(intent);
+    }
 }

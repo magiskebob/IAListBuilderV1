@@ -51,7 +51,8 @@
             android:textAllCaps="false"
             android:textSize="20dp"
             android:text="Scum"
-            android:onClick="getScumList"/>
+            android:onClick="getScumList"
+            android:paddingBottom="10dp"/>
 
 
 

@@ -1,5 +1,6 @@
 package com.example.kongsgaard.ialistbuilderv1;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -28,6 +29,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase myDataBase;
 
     private final Context myContext;
+    public static final String ARMYLISTS_TABLE_NAME = "ArmyLists";
+    public static final String ARMYLISTS_COLUMN_LISTNAME = "ListName";
+    public static final String ARMYLISTS_COLUMN_LISTCOST = "ListCost";
 
     /**
      * Constructor
@@ -189,6 +193,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         close();
         return cardList;
+    }
+    public List<ArmyList> getArmyLists(){
+        ArmyList temp = null;
+        List<ArmyList>templist = new ArrayList<>();
+        openDataBase();
+        Cursor cursor = myDataBase.rawQuery("SELECT * FROM ArmyLists", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            temp = new ArmyList(cursor.getString(1),cursor.getInt(2));
+            templist.add(temp);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        close();
+        return templist;
+    }
+    public void addArmyList(ArmyList list){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ARMYLISTS_COLUMN_LISTNAME,list.Name);
+        contentValues.put(ARMYLISTS_COLUMN_LISTCOST, list.TotalCost);
+        db.insert(ARMYLISTS_TABLE_NAME, null, contentValues);
+
+
     }
 
     @Override
