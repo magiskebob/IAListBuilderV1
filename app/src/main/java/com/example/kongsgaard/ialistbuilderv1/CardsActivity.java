@@ -23,6 +23,7 @@ public class CardsActivity extends AppCompatActivity {
     CardClassArrayAdapter baseAdapter;
     CardClass tempcard;
     DataBaseHelper myOperator;
+    List<Integer> cardPaths;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class CardsActivity extends AppCompatActivity {
         baseAdapter = new CardClassArrayAdapter(this, baselist);
         mainView.setAdapter(baseAdapter);
         myOperator = new DataBaseHelper(this);
+        cardPaths = new ArrayList<>();
  //       getRebelList(null);
         mainView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -49,7 +51,14 @@ public class CardsActivity extends AppCompatActivity {
 
     }
 
-
+    public List<Integer> makeIntegerList (List<CardClass> cardlist)
+    {
+        List<Integer> templist = new ArrayList<>();
+        for (CardClass card:cardlist) {
+            templist.add(card.CardImage);
+        }
+        return templist;
+    }
 
 
     public void getRebelList(View view) {
@@ -63,6 +72,7 @@ public class CardsActivity extends AppCompatActivity {
             baseAdapter.notifyDataSetChanged();
 
         }
+        cardPaths = makeIntegerList(baselist);
     }
 
     public void getEmpireList(View view) {
@@ -75,6 +85,7 @@ public class CardsActivity extends AppCompatActivity {
             baseAdapter.notifyDataSetChanged();
 
         }
+        cardPaths = makeIntegerList(baselist);
     }
 
     public void getScumList(View view) {
@@ -87,6 +98,7 @@ public class CardsActivity extends AppCompatActivity {
             baseAdapter.notifyDataSetChanged();
 
         }
+        cardPaths = makeIntegerList(baselist);
     }
 
     public void viewCard(View view) {
