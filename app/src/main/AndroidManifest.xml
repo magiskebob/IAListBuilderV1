@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".CardsActivity" />
         <activity android:name=".ViewCardActivity" />
-        <activity android:name=".ArmyListsActivity"></activity>
+        <activity android:name=".ArmyListsActivity" />
+        <activity android:name=".ImageSwiper"></activity>
     </application>
 
 </manifest>

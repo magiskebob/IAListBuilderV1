@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,8 +41,12 @@ public class CardsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 tempcard = (CardClass)mainView.getItemAtPosition(position);
-                Intent intent = new Intent(CardsActivity.this, ViewCardActivity.class);
+                int card_position = mainView.getSelectedItemPosition();
+              //  Intent intent = new Intent(CardsActivity.this, ViewCardActivity.class);
+                Intent intent = new Intent(CardsActivity.this,ImageSwiper.class);
                 intent.putExtra("cardpath", tempcard.CardImage);
+                intent.putExtra("card_position", position);
+                intent.putIntegerArrayListExtra("int_list", (ArrayList)cardPaths);
                 startActivity(intent);
             }
 
