@@ -3,7 +3,7 @@
     package="com.example.kongsgaard.ialistbuilderv1">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +22,9 @@
         <activity android:name=".CardsActivity" />
         <activity android:name=".ViewCardActivity" />
         <activity android:name=".ArmyListsActivity" />
-        <activity android:name=".ImageSwiper"></activity>
+        <activity android:name=".ImageSwiper" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".StatestikActivity"></activity>
     </application>
 
 </manifest>

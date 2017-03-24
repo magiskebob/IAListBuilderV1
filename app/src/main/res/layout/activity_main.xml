@@ -22,9 +22,6 @@
         android:textSize="25dp"
         android:textAlignment="center"
         android:layout_marginTop="10dp"/>
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
@@ -76,21 +73,7 @@
             android:paddingTop="20dp"
             />
 
-        <Button
-            android:id="@+id/statestik"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
-            android:text="Statestics"
-            android:textSize="25dp"
-            android:textAllCaps="false"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp"
-            />
-
 
     </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>
