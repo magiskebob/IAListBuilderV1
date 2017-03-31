@@ -41,7 +41,9 @@
         android:background="@color/White"
         android:textColor="@color/black"
         android:textColorHint="@color/Gray"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:inputType="textPassword"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

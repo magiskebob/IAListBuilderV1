@@ -3,6 +3,7 @@ package com.example.kongsgaard.ialistbuilderv1;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +14,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements GestureDetector.OnGestureListener  {
@@ -62,6 +67,15 @@ public class LoginActivity extends AppCompatActivity implements GestureDetector.
     }
     public void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (e instanceof FirebaseException){
+                            Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+                })
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -71,15 +85,16 @@ public class LoginActivity extends AppCompatActivity implements GestureDetector.
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                                  Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                     Toast.LENGTH_SHORT).show();
+
                         }
 
                         // ...
                     }
                 });
     }
-        public void signIn(String email, String password) {
+        public void signIn(final String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -93,6 +108,11 @@ public class LoginActivity extends AppCompatActivity implements GestureDetector.
                             Log.w("TAG", "signInWithEmail", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                        }
+                        else if (task.isSuccessful()){
+
+                            Toast.makeText(LoginActivity.this, "user "+ email+" logged in",Toast.LENGTH_LONG).show();
+
                         }
 
                         // ...
@@ -154,14 +174,29 @@ public class LoginActivity extends AppCompatActivity implements GestureDetector.
     }
 
     public void signIn2(View view) {
-        String Email = email.getText().toString().trim();
-        String Password = password.getText().toString().trim();
-        signIn(Email,Password);
+        try {
+            String Email = email.getText().toString().trim();
+            String Password = password.getText().toString().trim();
+            signIn(Email, Password);
+        }
+        catch (Exception e) {
+            Log.e("Army",e.getMessage(),e);
+            Toast.makeText(LoginActivity.this,"Please Fill Out all fields", Toast.LENGTH_LONG);
+        }
+
     }
 
     public void NewUser(View view) {
-        String Email = email.getText().toString().trim();
-        String Password = password.getText().toString().trim();
-        createAccount(Email, Password);
+        try {
+            String Email = email.getText().toString().trim();
+            String Password = password.getText().toString().trim();
+            createAccount(Email, Password);
+        }
+        catch (Exception e) {
+            Log.e("Army",e.getMessage(),e);
+            Toast.makeText(LoginActivity.this,"Please Fill Out all fields", Toast.LENGTH_LONG).show();
+
+        }
+
     }
 }
