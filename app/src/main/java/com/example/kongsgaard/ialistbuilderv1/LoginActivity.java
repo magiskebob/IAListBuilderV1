@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity implements GestureDetector.
         }
         catch (Exception e) {
             Log.e("Army",e.getMessage(),e);
-            Toast.makeText(LoginActivity.this,"Please Fill Out all fields", Toast.LENGTH_LONG);
+            Toast.makeText(LoginActivity.this,"Please Fill Out all fields", Toast.LENGTH_LONG).show();
         }
 
     }
