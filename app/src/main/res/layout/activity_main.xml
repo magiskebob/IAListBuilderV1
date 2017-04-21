@@ -55,6 +55,7 @@
             android:textAllCaps="false"
             android:paddingBottom="20dp"
             android:paddingTop="20dp"
+            android:onClick="listDishes"
 
             />
 

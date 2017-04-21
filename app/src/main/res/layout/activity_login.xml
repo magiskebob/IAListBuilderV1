@@ -47,7 +47,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
         <Button
             android:layout_gravity="left"
             android:text="Sign In"
@@ -65,6 +66,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/signUpButton"
             android:onClick="NewUser"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remember Email"
+            android:checked="false"
+            android:onClick="rememberPrefence"
+            android:id="@+id/rememberBox"/>
     </LinearLayout>
 
 

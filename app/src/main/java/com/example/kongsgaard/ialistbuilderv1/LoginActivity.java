@@ -1,6 +1,7 @@
 package com.example.kongsgaard.ialistbuilderv1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -52,6 +54,23 @@ public class LoginActivity extends AppCompatActivity implements GestureDetector.
         };
         email = (EditText)findViewById(R.id.Emailtext);
         password = (EditText) findViewById(R.id.PasswordText);
+
+        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        String prefEmail = settings.getString("Username",null);
+        email.setText(prefEmail);
+        SharedPreferences.Editor editor = getSharedPreferences("Username",MODE_PRIVATE).edit();
+    }
+    public void rememberPrefence(View view){
+        SharedPreferences settings = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        CheckBox box = (CheckBox) findViewById(R.id.rememberBox);
+        if (box.isChecked()== true){
+            editor.putString("Username", email.getText().toString());
+        }
+        else {
+            editor.remove("Username");
+        }
+        editor.apply();
     }
     @Override
     public void onStart() {
@@ -167,8 +186,9 @@ public class LoginActivity extends AppCompatActivity implements GestureDetector.
         boolean leftSwipe = e1.getX() > e2.getX();
        // Log.d(TAG, "onFling left: " + leftSwipe);
         if (leftSwipe) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(this, MainActivity.class);
+            //startActivity(intent);
+            finish();
         }
         return true; // done
     }

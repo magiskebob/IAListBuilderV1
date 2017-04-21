@@ -98,4 +98,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
         return true; // done
     }
+    public void listDishes(View view){
+        Intent intent = new Intent(this,GetDishesActivity.class);
+        startActivity(intent);
+
+    }
 }
