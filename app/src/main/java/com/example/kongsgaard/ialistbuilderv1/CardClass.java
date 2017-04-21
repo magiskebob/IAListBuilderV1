@@ -1,10 +1,12 @@
 package com.example.kongsgaard.ialistbuilderv1;
 
+import java.io.Serializable;
+
 /**
  * Created by Kongsgaard on 05-02-2017.
  */
 
-public class CardClass {
+public class CardClass implements Serializable{
     public int _id ;
     public String Name;
     public int PointCost;

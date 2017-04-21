@@ -1,11 +1,13 @@
 package com.example.kongsgaard.ialistbuilderv1;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -20,7 +22,7 @@ import java.util.Objects;
 public class CardsActivity extends AppCompatActivity {
 
     ListView mainView;
-    List<CardClass> baselist;
+    ArrayList<CardClass> baselist;
     CardClassArrayAdapter baseAdapter;
     CardClass tempcard;
     DataBaseHelper myOperator;
@@ -32,6 +34,14 @@ public class CardsActivity extends AppCompatActivity {
         mainView = (ListView) findViewById(R.id.mainListView);
         Intent intent = getIntent();
         baselist = new ArrayList<>();
+        if (savedInstanceState !=null)
+        {
+            baselist = (ArrayList)savedInstanceState.getSerializable("savedList");
+        }
+        else{
+            baselist = new ArrayList<>();
+        }
+
         baseAdapter = new CardClassArrayAdapter(this, baselist);
         mainView.setAdapter(baseAdapter);
         myOperator = new DataBaseHelper(this);
@@ -51,9 +61,12 @@ public class CardsActivity extends AppCompatActivity {
             }
 
         });
+    }
 
-
-
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("savedList",baselist);
     }
 
     public List<Integer> makeIntegerList (List<CardClass> cardlist)
@@ -67,6 +80,7 @@ public class CardsActivity extends AppCompatActivity {
 
 
     public void getRebelList(View view) {
+        Log.d("button", "get rebel list called");
        // List<CardClass> rebelList = new ArrayList<>();
         List<CardClass> rebelList = myOperator.getRebelList();
        // rebelList.add(luke1);
@@ -81,6 +95,7 @@ public class CardsActivity extends AppCompatActivity {
     }
 
     public void getEmpireList(View view) {
+        Log.d("button", "get empire list called");
         List<CardClass> empireList = myOperator.getEmpireList();
        // CardClass darthVader = new CardClass(1,"Darth vader", 18, R.drawable.darthvader);
        // empireList.add(darthVader);
@@ -94,6 +109,7 @@ public class CardsActivity extends AppCompatActivity {
     }
 
     public void getScumList(View view) {
+        Log.d("button", "get scum list called");
         List<CardClass> scumList = myOperator.getScumList();
        // CardClass bobaFett = new CardClass(1,"Boba Fett", 13, R.drawable.bobafett);
       //  scumList.add(bobaFett);
